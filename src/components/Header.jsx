@@ -4,9 +4,11 @@ export default function Header({ patient, onToggleSidebar }) {
   return (
     <div className="navbar">
       <div className="navbar-left">
-        <button className="hamburger-btn" onClick={onToggleSidebar}>
-          <span className="material-symbols-outlined">menu</span>
-        </button>
+        {onToggleSidebar ? (
+          <button className="hamburger-btn" onClick={onToggleSidebar}>
+            <span className="material-symbols-outlined">menu</span>
+          </button>
+        ) : null}
         <div className="heading-box">
           <button className="icon-button" onClick={() => window.history.back()}>
             <span className="material-icons">arrow_back</span>

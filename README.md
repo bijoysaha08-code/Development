@@ -1,6 +1,6 @@
-# React Dashboard
+# Portfolio (React + Vite)
 
-This project is a skeleton of a React/Vite dashboard application built for visualization of patient data.
+This project is a portfolio workspace built with React and Vite. It includes a portfolio landing page and a healthcare CRM demo route.
 
 ## Setup
 
@@ -21,9 +21,14 @@ This project is a skeleton of a React/Vite dashboard application built for visua
 
 ## Features
 
-- Patient header with basic info and action buttons
-- Alert banner
-- Vital sign cards
-- Reports table
+- Portfolio-first landing page with project cards
+- Dedicated healthcare CRM demo route
+- Patient header with action buttons
+- Vital sign cards and reports table
 
-Customize `src/App.jsx` and components under `src/components/` to implement additional screens and features.
+## Routes
+
+- `/` and `/portfolio`: portfolio landing page
+- `/healthcare-crm`: healthcare dashboard demo
+
+Customize `src/App.jsx` and components under `src/components/` to add more projects and screens.

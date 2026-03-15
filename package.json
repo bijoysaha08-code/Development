@@ -1,6 +1,7 @@
 {
-  "name": "react-dashboard",
+  "name": "portfolio",
   "version": "0.1.0",
+  "description": "Portfolio workspace powered by React and Vite with project demos.",
   "private": true,
   "dependencies": {
     "react": "^19.2.4",
