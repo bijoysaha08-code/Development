@@ -450,13 +450,17 @@ body {
 }
 
 .project-link-logo {
+  width: 34px;
   height: 34px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 14px;
   font-weight: 700;
-  color: #111827;
+  color: #ffffff;
+  background: #01b58c;
+  border-radius: 999px;
+  margin: 0 auto;
 }
 
 .project-link-toggle {
@@ -476,6 +480,10 @@ body {
 .project-link-sidebar.expanded .project-link-toggle {
   justify-content: flex-start;
   padding-left: 22px;
+}
+
+.project-link-sidebar.expanded .project-link-logo {
+  margin: 0;
 }
 
 .project-link-toggle .material-symbols-outlined,
