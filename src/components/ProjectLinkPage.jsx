@@ -7,7 +7,7 @@ export default function ProjectLinkPage({ project }) {
       <header className="project-link-topbar">
         <Link
           to={`/project/${project.slug}`}
-          className="project-link-back-link"
+          className="project-link-back-button"
           aria-label={`Back to ${project.title} details`}
         >
           <span className="material-symbols-outlined" aria-hidden="true">

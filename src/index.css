@@ -396,12 +396,14 @@ body {
   border-bottom: 1px solid #e5e7eb;
 }
 
-.project-link-back-link {
+.project-link-back-button {
   display: inline-flex;
   align-items: center;
   gap: 6px;
   color: #111827;
   text-decoration: none;
+  padding: 2px 4px;
+  border-radius: 6px;
 }
 
 .project-link-title {
@@ -411,7 +413,7 @@ body {
   font-weight: 500;
 }
 
-.project-link-back-link .material-symbols-outlined {
+.project-link-back-button .material-symbols-outlined {
   font-size: 22px;
 }
 
