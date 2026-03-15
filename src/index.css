@@ -375,13 +375,29 @@ body {
 }
 
 .project-link-page {
-  width: min(720px, 100%);
+  width: 100%;
+  max-width: none;
   min-height: calc(100vh - 2rem);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding-top: 40px;
+  padding-top: 0;
   gap: 1.5rem;
+}
+
+.project-link-topbar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 15px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.project-link-title {
+  margin: 0;
+  color: #111827;
+  font-size: 2rem;
+  font-weight: 700;
 }
 
 .project-detail-header {
@@ -642,7 +658,7 @@ body {
   .project-link-page {
     min-height: calc(100dvh - 2rem);
     justify-content: flex-start;
-    padding-top: 40px;
+    padding-top: 0;
   }
 }
 
@@ -665,6 +681,10 @@ body {
   }
 
   .project-detail-header h1 {
+    font-size: 1.6rem;
+  }
+
+  .project-link-title {
     font-size: 1.6rem;
   }
 

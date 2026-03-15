@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export default function ProjectLinkPage({ project }) {
   return (
     <section className="project-link-page">
-      <header className="project-detail-header">
+      <header className="project-link-topbar">
         <Link
           to={`/project/${project.slug}`}
           className="project-detail-back"
@@ -14,7 +14,7 @@ export default function ProjectLinkPage({ project }) {
             arrow_left_alt
           </span>
         </Link>
-        <h1>{project.title} Link Page</h1>
+        <h1 className="project-link-title">{project.title} Link Page</h1>
       </header>
 
       <p className="project-detail-copy">
