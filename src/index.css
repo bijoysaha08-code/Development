@@ -471,6 +471,11 @@ body {
   cursor: pointer;
 }
 
+.project-link-toggle .material-symbols-outlined,
+.project-link-nav-item .material-symbols-outlined {
+  font-size: 24px;
+}
+
 .project-link-nav {
   display: flex;
   flex-direction: column;
