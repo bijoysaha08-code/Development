@@ -269,7 +269,7 @@ body {
   gap: 0.75rem;
   margin-top: auto;
   position: sticky;
-  bottom: 0;
+  bottom: 100px;
   background: #ffffff;
   padding-top: 0.75rem;
 }
