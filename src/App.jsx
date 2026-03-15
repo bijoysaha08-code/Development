@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 import Vitals from './components/Vitals';
 import ReportsTable from './components/ReportsTable';
+import Portfolio from './components/Portfolio';
 
 const patient = {
   name: 'Michael Johnson',
@@ -25,23 +27,35 @@ const reportsData = [
 
 export default function App() {
   const [sidebarExpanded, setSidebarExpanded] = useState(false);
-
   return (
-    <div className="app-layout">
-      <Sidebar isExpanded={sidebarExpanded} toggleSidebar={() => setSidebarExpanded(!sidebarExpanded)} />
-      <div className="main-content">
-        <Header patient={patient} onToggleSidebar={() => setSidebarExpanded(!sidebarExpanded)} />
-        <div className="container">
-          <div className="card">
-            <h2>Vitals</h2>
-            <Vitals vitals={vitalsData} />
-          </div>
-          <div className="card">
-            <h2>Recent Reports</h2>
-            <ReportsTable reports={reportsData} />
-          </div>
+    <Router>
+      <div className="app-layout">
+        <Sidebar isExpanded={sidebarExpanded} toggleSidebar={() => setSidebarExpanded(!sidebarExpanded)} />
+        <div className="main-content">
+          <nav style={{ marginBottom: '1rem' }}>
+            <Link to="/portfolio" className="button">Portfolio</Link>
+          </nav>
+          <Routes>
+            <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/healthcare-crm" element={
+              <>
+                <Header patient={patient} onToggleSidebar={() => setSidebarExpanded(!sidebarExpanded)} />
+                <div className="container">
+                  <div className="card">
+                    <h2>Vitals</h2>
+                    <Vitals vitals={vitalsData} />
+                  </div>
+                  <div className="card">
+                    <h2>Recent Reports</h2>
+                    <ReportsTable reports={reportsData} />
+                  </div>
+                </div>
+              </>
+            } />
+            <Route path="*" element={<Portfolio />} />
+          </Routes>
         </div>
       </div>
-    </div>
+    </Router>
   );
 }

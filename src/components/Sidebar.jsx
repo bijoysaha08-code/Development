@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Sidebar({ isExpanded, toggleSidebar }) {
   const menuItems = [
@@ -6,6 +7,7 @@ export default function Sidebar({ isExpanded, toggleSidebar }) {
     { icon: 'people', label: 'Patients' },
     { icon: 'calendar_today', label: 'Calendar' },
     { icon: 'settings', label: 'Settings' },
+    { icon: 'folder', label: 'Portfolio', link: '/portfolio' },
   ];
 
   return (
@@ -19,10 +21,17 @@ export default function Sidebar({ isExpanded, toggleSidebar }) {
       {isExpanded && (
         <nav className="menu">
           {menuItems.map((item, index) => (
-            <a key={index} href="#" className="menu-item">
-              <span className="material-icons">{item.icon}</span>
-              <span className="menu-label">{item.label}</span>
-            </a>
+            item.link ? (
+              <Link key={index} to={item.link} className="menu-item">
+                <span className="material-icons">{item.icon}</span>
+                <span className="menu-label">{item.label}</span>
+              </Link>
+            ) : (
+              <a key={index} href="#" className="menu-item">
+                <span className="material-icons">{item.icon}</span>
+                <span className="menu-label">{item.label}</span>
+              </a>
+            )
           ))}
         </nav>
       )}
