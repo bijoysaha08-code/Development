@@ -391,15 +391,27 @@ body {
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: 0 15px 15px;
+  padding: 0 15px 7px;
   border-bottom: 1px solid #e5e7eb;
 }
 
 .project-link-title {
   margin: 0;
   color: #111827;
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 700;
+}
+
+.project-link-topbar .project-detail-back {
+  width: auto;
+  height: auto;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+}
+
+.project-link-topbar .project-detail-back .material-symbols-outlined {
+  font-size: 22px;
 }
 
 .project-detail-header {
@@ -687,7 +699,7 @@ body {
   }
 
   .project-link-title {
-    font-size: 1.6rem;
+    font-size: 18px;
   }
 
   .project-app-grid {
