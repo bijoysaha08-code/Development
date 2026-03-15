@@ -390,6 +390,7 @@ body {
 .project-link-topbar {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 1rem;
   padding: 0 15px 7px;
   border-bottom: 1px solid #e5e7eb;
@@ -398,8 +399,8 @@ body {
 .project-link-title {
   margin: 0;
   color: #111827;
-  font-size: 18px;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 500;
 }
 
 .project-link-topbar .project-detail-back {
@@ -699,7 +700,7 @@ body {
   }
 
   .project-link-title {
-    font-size: 18px;
+    font-size: 14px;
   }
 
   .project-app-grid {
