@@ -45,7 +45,7 @@ export default function ProjectDetail({ project }) {
 
       <Link
         className="project-detail-link-button"
-        to={`/project/${project.slug}/link`}
+        to={project.linkPath || `/project/${project.slug}/link`}
       >
         Open Link
       </Link>
