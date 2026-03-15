@@ -217,7 +217,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 1.25rem 0;
-  border-bottom: 1px solid #e6e6e6;
+  border-bottom: none;
 }
 
 .landing-logo {
@@ -261,30 +261,31 @@ body {
 
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(260px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
 }
 
 .project-box {
   background: #fff;
   border: 1px solid #e3e3e3;
   border-radius: 12px;
-  padding: 1.1rem;
+  padding: 0.85rem;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  min-height: 160px;
+  gap: 0.5rem;
+  min-height: 120px;
 }
 
 .project-box h2 {
   margin: 0;
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: #111827;
 }
 
 .project-box p {
   margin: 0;
   color: #4b5563;
+  font-size: 0.9rem;
 }
 
 .project-box a {
@@ -338,6 +339,12 @@ body {
     align-items: flex-start;
   }
 
+  .project-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
   .project-grid {
     grid-template-columns: 1fr;
   }

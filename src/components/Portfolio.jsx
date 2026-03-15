@@ -42,16 +42,6 @@ const Portfolio = () => {
           <a href="#" aria-disabled="true">Coming Soon</a>
         </article>
       </section>
-
-      <section id="cv" className="landing-info">
-        <h3>CV</h3>
-        <p>Add your CV link or downloadable resume here.</p>
-      </section>
-
-      <section id="contact" className="landing-info">
-        <h3>Contact</h3>
-        <p>Add your email, LinkedIn, and other contact links here.</p>
-      </section>
     </section>
   );
 };
