@@ -473,18 +473,17 @@ body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  margin-top: 40px;
-  margin-bottom: 40px;
-}
-
-.project-link-sidebar.expanded .project-link-logo,
-.project-link-sidebar.expanded .project-link-toggle {
-  justify-content: flex-start;
-  padding-left: 22px;
+  margin-top: 33px;
+  margin-bottom: 32px;
 }
 
 .project-link-sidebar.expanded .project-link-logo {
-  margin: 4px 0 0;
+  margin: 4px 0 0 22px;
+}
+
+.project-link-sidebar.expanded .project-link-toggle {
+  justify-content: flex-start;
+  padding-left: 22px;
 }
 
 .project-link-toggle .material-symbols-outlined,
