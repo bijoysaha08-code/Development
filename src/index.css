@@ -385,7 +385,7 @@ body {
   margin-top: -1rem;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
-  gap: 1.5rem;
+  gap: 0;
 }
 
 .project-link-topbar {
@@ -415,6 +415,99 @@ body {
 
 .project-link-back-button .material-symbols-outlined {
   font-size: 22px;
+}
+
+.project-link-dashboard {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: stretch;
+}
+
+.project-link-sidebar {
+  background: #ffffff;
+  border-right: 1px solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: width 0.2s ease;
+}
+
+.project-link-sidebar.collapsed {
+  width: 68px;
+}
+
+.project-link-sidebar.expanded {
+  width: 220px;
+}
+
+.project-link-sidebar-top {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 6px;
+  padding-top: 10px;
+}
+
+.project-link-logo {
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.project-link-toggle {
+  width: 100%;
+  min-height: 40px;
+  border: none;
+  background: transparent;
+  color: #111827;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.project-link-nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.project-link-nav-item {
+  width: 100%;
+  min-height: 40px;
+  border: none;
+  background: transparent;
+  color: #111827;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 10px;
+  cursor: pointer;
+}
+
+.project-link-sidebar.expanded .project-link-nav-item {
+  justify-content: flex-start;
+  padding: 0 14px;
+}
+
+.project-link-nav-item span:last-child {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.project-link-logout {
+  margin-bottom: 10px;
+}
+
+.project-link-main {
+  flex: 1;
+  min-width: 0;
+  background: #f4f5f7;
 }
 
 .project-detail-header {
@@ -676,6 +769,10 @@ body {
     min-height: calc(100dvh - 1rem);
     justify-content: flex-start;
     padding-top: 0;
+  }
+
+  .project-link-sidebar.expanded {
+    width: 200px;
   }
 }
 
