@@ -26,7 +26,7 @@ const Portfolio = () => {
       </header>
 
       <section className="landing-hero">
-        <h1>Portfolio Landing Page</h1>
+        <h1>Experience Designer specializing in Storytelling, Strategy, Enterprise UX, and Scalable Design Systems — leveraging Gen AI and modern design tools.</h1>
         <p>Select an area to explore my work.</p>
       </section>
 
