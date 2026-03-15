@@ -362,12 +362,22 @@ body {
 }
 
 @media (max-width: 900px) {
+  .app-layout {
+    height: auto;
+    min-height: 100dvh;
+  }
+
+  .landing-page {
+    min-height: auto;
+  }
+
   .landing-page {
     padding-bottom: 16px;
   }
 
   .main-content {
     padding: 1rem 16px;
+    overflow-y: visible;
   }
 
   .portfolio-strip {
