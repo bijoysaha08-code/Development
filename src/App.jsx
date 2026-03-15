@@ -8,25 +8,37 @@ import Portfolio from './components/Portfolio';
 
 const patient = {
   name: 'Michael Johnson',
-  age: 45,
-  id: 'P12345',
+  age: 54,
+  gender: 'Male',
+  id: '230145',
+  admitted: '01/18/2026 (18:32:52)',
+  icuTime: '4 Days',
+  bed: '#8F9890090 ICU',
 };
 
 const vitalsData = [
-  { label: 'Heart Rate', value: '78', unit: 'bpm' },
-  { label: 'Blood Pressure', value: '120/80', unit: 'mmHg' },
-  { label: 'Temperature', value: '98.6', unit: '°F' },
-  { label: 'Oxygen Saturation', value: '98%', unit: '' },
+  { title: 'Blood Pressure', value: '220 / 120', badge: 'Rising', note: 'Above post-tPA target. Review IV antihypertensive.' },
+  { title: 'Heart Rate', value: '112 bpm', badge: 'Irregular', note: 'Persistent tachycardia for 3 hrs.' },
+  { title: 'SpO2', value: '91%', badge: 'Ventilator', note: 'Below target despite oxygen.' },
+  { title: 'Temperature', value: '38.4°C', badge: 'Normal', note: 'Persistent fever → evaluate infection.' },
+  { title: 'Urine Output', value: '400 ml', badge: 'Declining', note: 'May indicate dehydration or AKI.' },
 ];
 
 const reportsData = [
-  { date: '2024-01-15', type: 'Blood Test', status: 'Complete' },
-  { date: '2024-01-10', type: 'X-Ray', status: 'Pending' },
-  { date: '2024-01-05', type: 'ECG', status: 'Complete' },
+  { name: 'CT', result: 'Acute Stroke', date: '12/02/2026', priority: 'Very High', status: 'Completed' },
+  { name: 'Echo', result: 'Normal', date: '12/02/2026', priority: 'Very High', status: 'Completed' },
+  { name: 'Fasting Blood Glucose', result: '215', date: '12/02/2026', priority: 'Very High', status: 'Completed' },
+  { name: 'Thyroid-Stimulating Hormone (TSH)', result: '34', date: '12/02/2026', priority: 'Very High', status: 'Completed' },
+  { name: 'Renal Function Test', result: '9.65', date: '12/02/2026', priority: 'Very High', status: 'Completed' },
+  { name: 'Latest chest X-ray', result: '-', date: '14/02/2026', priority: 'Very High', status: 'In Progress' },
 ];
+
+const TABS = ['Reports', 'Assessment', 'Prescription'];
 
 export default function App() {
   const [sidebarExpanded, setSidebarExpanded] = useState(false);
+  const [activeTab, setActiveTab] = useState('Assessment');
+
   return (
     <Router>
       <div className="app-layout">
@@ -40,15 +52,35 @@ export default function App() {
             <Route path="/healthcare-crm" element={
               <>
                 <Header patient={patient} onToggleSidebar={() => setSidebarExpanded(!sidebarExpanded)} />
-                <div className="container">
-                  <div className="card">
-                    <h2>Vitals</h2>
-                    <Vitals vitals={vitalsData} />
-                  </div>
-                  <div className="card">
-                    <h2>Recent Reports</h2>
-                    <ReportsTable reports={reportsData} />
-                  </div>
+
+                <div className="alert">
+                  Need urgent review as patient having higher BP
+                </div>
+
+                <div className="section-title">Vitals</div>
+                <Vitals data={vitalsData} />
+
+                <div className="tabs">
+                  {TABS.map((tab) => (
+                    <button
+                      key={tab}
+                      className={`tab${activeTab === tab ? ' active' : ''}`}
+                      onClick={() => setActiveTab(tab)}
+                    >
+                      {tab}
+                    </button>
+                  ))}
+                </div>
+
+                <div className="table-container">
+                  {activeTab === 'Assessment' && <ReportsTable reports={reportsData} />}
+                  {activeTab === 'Reports' && <p>No reports available.</p>}
+                  {activeTab === 'Prescription' && <p>No prescriptions available.</p>}
+                </div>
+
+                <div className="footer-actions">
+                  <button className="button cancel">Cancel</button>
+                  <button className="button submit">Submit</button>
                 </div>
               </>
             } />

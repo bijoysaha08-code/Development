@@ -1,20 +1,19 @@
 import React from 'react';
 
-function VitalCard({ title, value, note, status, extra }) {
+function VitalCard({ title, value, badge, note }) {
   return (
-    <div className="card" style={{ flex: 1, margin: '0 0.5rem' }}>
-      <h3>{title}</h3>
-      <p style={{ fontSize: '1.5rem', margin: '0.5rem 0' }}>{value}</p>
-      {status && <small>{status}</small>}
-      {note && <p style={{ marginTop: '0.5rem', color: '#666' }}>{note}</p>}
-      {extra && <div>{extra}</div>}
+    <div className="card vital-card">
+      <h4>{title}</h4>
+      <div className="big-value">{value}</div>
+      {badge && <span className="badge">{badge}</span>}
+      {note && <div className="note">{note}</div>}
     </div>
   );
 }
 
 export default function Vitals({ data }) {
   return (
-    <div style={{ display: 'flex', marginTop: '1rem', alignItems: 'center' }}>
+    <div className="vitals">
       {data.map((item) => (
         <VitalCard key={item.title} {...item} />
       ))}
