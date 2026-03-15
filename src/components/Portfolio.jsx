@@ -1,11 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 const Portfolio = () => {
   return (
     <section className="landing-page">
       <header className="landing-header">
-        <Link to="/" className="landing-logo">Bijoy Saha</Link>
+        <a href="#" className="landing-logo">Bijoy Saha</a>
         <nav className="landing-menu">
           <a href="#projects">Projects</a>
           <a href="#cv">Resume</a>
@@ -28,7 +27,7 @@ const Portfolio = () => {
         <article className="project-box project-box-active">
           <h2>Healthcare</h2>
           <p>Open the existing healthcare interface.</p>
-          <Link to="/healthcare-crm">Open Healthcare</Link>
+          <a href="#" aria-disabled="true">Coming Soon</a>
         </article>
 
         <article className="project-box">
