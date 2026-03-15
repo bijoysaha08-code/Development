@@ -392,9 +392,16 @@ body {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 6px;
   padding: 10px 15px;
   border-bottom: 1px solid #e5e7eb;
+}
+
+.project-link-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #111827;
+  text-decoration: none;
 }
 
 .project-link-title {
@@ -404,15 +411,7 @@ body {
   font-weight: 500;
 }
 
-.project-link-topbar .project-detail-back {
-  width: auto;
-  height: auto;
-  border: none;
-  border-radius: 0;
-  padding: 0;
-}
-
-.project-link-topbar .project-detail-back .material-symbols-outlined {
+.project-link-back-link .material-symbols-outlined {
   font-size: 22px;
 }
 

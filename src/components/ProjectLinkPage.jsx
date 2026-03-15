@@ -7,14 +7,14 @@ export default function ProjectLinkPage({ project }) {
       <header className="project-link-topbar">
         <Link
           to={`/project/${project.slug}`}
-          className="project-detail-back"
+          className="project-link-back-link"
           aria-label={`Back to ${project.title} details`}
         >
           <span className="material-symbols-outlined" aria-hidden="true">
             arrow_left_alt
           </span>
+          <span className="project-link-title">Back</span>
         </Link>
-        <h1 className="project-link-title">Back</h1>
       </header>
 
       <p className="project-detail-copy">
