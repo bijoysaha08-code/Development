@@ -391,9 +391,9 @@ body {
 .project-link-topbar {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 6px;
-  padding: 0 15px 4px;
+  padding: 10px 15px;
   border-bottom: 1px solid #e5e7eb;
 }
 
