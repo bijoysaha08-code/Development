@@ -471,6 +471,12 @@ body {
   cursor: pointer;
 }
 
+.project-link-sidebar.expanded .project-link-logo,
+.project-link-sidebar.expanded .project-link-toggle {
+  justify-content: flex-start;
+  padding-left: 22px;
+}
+
 .project-link-toggle .material-symbols-outlined,
 .project-link-nav-item .material-symbols-outlined {
   font-size: 24px;
