@@ -1,14 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Portfolio = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <section className="landing-page">
       <header className="landing-header">
         <a href="#" className="landing-logo">Bijoy Saha</a>
-        <nav className="landing-menu">
-          <a href="#projects">Projects</a>
-          <a href="#cv">Resume</a>
-          <a href="#contact">Contact</a>
+        <button
+          type="button"
+          className="landing-menu-toggle"
+          aria-label="Toggle menu"
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen((prev) => !prev)}
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <nav className={`landing-menu ${menuOpen ? "open" : ""}`}>
+          <a href="#projects" onClick={() => setMenuOpen(false)}>Projects</a>
+          <a href="#cv" onClick={() => setMenuOpen(false)}>Resume</a>
+          <a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a>
         </nav>
       </header>
 

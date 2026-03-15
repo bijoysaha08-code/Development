@@ -222,6 +222,7 @@ body {
   align-items: center;
   padding: 1.25rem 0;
   border-bottom: none;
+  position: relative;
 }
 
 .landing-logo {
@@ -235,6 +236,27 @@ body {
 .landing-menu {
   display: flex;
   gap: 1.25rem;
+}
+
+.landing-menu-toggle {
+  display: none;
+  width: 42px;
+  height: 42px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: #ffffff;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.landing-menu-toggle span {
+  width: 18px;
+  height: 2px;
+  background: #111827;
+  display: block;
 }
 
 .landing-menu a {
@@ -347,9 +369,30 @@ body {
   }
 
   .landing-header {
+    align-items: center;
+  }
+
+  .landing-menu-toggle {
+    display: inline-flex;
+  }
+
+  .landing-menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 0.6rem 0.8rem;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
     flex-direction: column;
-    gap: 0.7rem;
-    align-items: flex-start;
+    gap: 0.55rem;
+    z-index: 20;
+  }
+
+  .landing-menu.open {
+    display: flex;
   }
 
   .project-grid {
