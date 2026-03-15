@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default function ProjectLinkPage({ project }) {
   const [sidebarExpanded, setSidebarExpanded] = useState(false);
+  const [activePage, setActivePage] = useState('Home');
 
   const navItems = [
     { icon: 'home', label: 'Home' },
@@ -11,6 +12,17 @@ export default function ProjectLinkPage({ project }) {
     { icon: 'lab_research', label: 'Reports' },
     { icon: 'settings', label: 'Settings' },
   ];
+
+  const pageCopy = {
+    Home: 'This is the Home dashboard area. Use this section for quick patient overview, alerts, and shortcuts.',
+    Appointments:
+      'This is the Appointments area. Use this section for schedules, doctor availability, and booking updates.',
+    Patients:
+      'This is the Patients area. Use this section for profile details, history, and treatment records.',
+    Reports: 'This is the Reports area. Use this section for test results, summaries, and analytics.',
+    Settings: 'This is the Settings area. Use this section for account preferences and system configurations.',
+    Logout: 'This is the Logout placeholder area. You can connect this action to a real sign-out workflow.',
+  };
 
   return (
     <section className="project-link-page">
@@ -50,25 +62,45 @@ export default function ProjectLinkPage({ project }) {
 
             <nav className="project-link-nav" aria-label="Primary">
               {navItems.map((item) => (
-                <button key={item.label} type="button" className="project-link-nav-item">
-                  <span className="material-symbols-outlined" aria-hidden="true">
-                    {item.icon}
+                <button
+                  key={item.label}
+                  type="button"
+                  className={`project-link-nav-item ${activePage === item.label ? 'active' : ''}`}
+                  aria-current={activePage === item.label ? 'page' : undefined}
+                  onClick={() => setActivePage(item.label)}
+                >
+                  <span className="project-link-icon-box" aria-hidden="true">
+                    <span className="material-symbols-outlined" aria-hidden="true">
+                      {item.icon}
+                    </span>
                   </span>
-                  {sidebarExpanded && <span>{item.label}</span>}
+                  {sidebarExpanded && <span className="project-link-nav-label">{item.label}</span>}
                 </button>
               ))}
             </nav>
           </div>
 
-          <button type="button" className="project-link-nav-item project-link-logout">
-            <span className="material-symbols-outlined" aria-hidden="true">
-              logout
+          <button
+            type="button"
+            className={`project-link-nav-item project-link-logout ${activePage === 'Logout' ? 'active' : ''}`}
+            aria-current={activePage === 'Logout' ? 'page' : undefined}
+            onClick={() => setActivePage('Logout')}
+          >
+            <span className="project-link-icon-box" aria-hidden="true">
+              <span className="material-symbols-outlined" aria-hidden="true">
+                logout
+              </span>
             </span>
-            {sidebarExpanded && <span>Logout</span>}
+            {sidebarExpanded && <span className="project-link-nav-label">Logout</span>}
           </button>
         </aside>
 
-        <div className="project-link-main" aria-label="Main dashboard area" />
+        <div className="project-link-main" aria-label="Main dashboard area">
+          <div className="project-link-main-content">
+            <h2>{activePage}</h2>
+            <p>{pageCopy[activePage]}</p>
+          </div>
+        </div>
       </section>
     </section>
   );
