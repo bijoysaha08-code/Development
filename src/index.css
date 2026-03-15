@@ -373,6 +373,7 @@ body {
   }
 
   .landing-header {
+    justify-content: space-between;
     align-items: center;
   }
 
@@ -405,16 +406,21 @@ body {
 
   .project-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    position: static;
+    bottom: auto;
+    margin-top: 1rem;
+    padding-top: 0;
+    background: transparent;
   }
 }
 
 @media (max-width: 640px) {
   .main-content {
-    padding: 0.75rem 12px;
+    padding: 1rem 16px;
   }
 
   .project-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
