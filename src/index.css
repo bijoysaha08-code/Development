@@ -360,10 +360,10 @@ body {
   justify-content: center;
   width: 100%;
   min-height: 44px;
-  border: 1px solid rgba(5, 96, 96, 0.38);
+  border: 1px solid #0F36FA;
   border-radius: 999px;
-  background: var(--brand-accent);
-  color: #ffffff;
+  background: #0F36FA;
+  color: #FFFFFF;
   text-decoration: none;
   text-align: center;
   line-height: 1;
@@ -374,17 +374,17 @@ body {
 }
 
 .landing-hero-btn:hover {
-  background: #044f4f;
+  background: #0C2ED1;
   transform: translateY(-1px);
 }
 
 .landing-hero-btn-secondary {
-  background: transparent;
-  color: var(--brand-accent);
+  background: #0F36FA;
+  color: #FFFFFF;
 }
 
 .landing-hero-btn-secondary:hover {
-  background: rgba(5, 96, 96, 0.08);
+  background: #0C2ED1;
 }
 
 .project-grid {
@@ -793,7 +793,7 @@ body {
   padding-right: 24px;
   border: none;
   background: #000000;
-  color: #ffffff;
+  color: #FFFFFF;
   font-family: 'Inter', sans-serif;
   font-size: 14px;
   font-weight: 500;
@@ -958,7 +958,7 @@ body {
 
 .landing-contact-actions a {
   text-decoration: none;
-  color: #ffffff;
+  color: #FFFFFF;
   background: rgba(255, 255, 255, 0.16);
   border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 999px;
