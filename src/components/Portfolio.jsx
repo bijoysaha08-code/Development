@@ -12,7 +12,8 @@ const Portfolio = ({ projects }) => {
         <div>
           <p className="landing-kicker">Experience Design and Product Strategy</p>
           <h1>
-            Specialized in System Design, Strategy, Storytelling, Enterprise Solutions, Design Systems — leveraging Gen AI and modern UX design tools.
+            Specialized in System Design, Strategy, Storytelling, Enterprise Solutions, Design Systems{" "}
+            <span className="hero-gradient-text">— leveraging Gen AI and modern UX design tools.</span>
           </h1>
           <p className="landing-intro">
             I help organizations convert complexity into usable systems through narrative-driven UX,
