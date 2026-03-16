@@ -237,13 +237,13 @@ body {
 
 .landing-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
-  padding: 1.25rem 1.25rem;
-  border: 1px solid var(--brand-line);
-  border-radius: 20px;
-  background: var(--brand-surface);
-  backdrop-filter: blur(8px);
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  backdrop-filter: none;
   position: relative;
 }
 
@@ -375,8 +375,8 @@ body {
   gap: 0.95rem;
   margin-top: 0.5rem;
   position: sticky;
-  bottom: 22px;
-  background: linear-gradient(180deg, rgba(244, 239, 228, 0) 0%, var(--brand-bg) 20%);
+  bottom: 100px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, var(--brand-bg) 20%);
   padding-top: 1.35rem;
 }
 
@@ -981,39 +981,6 @@ body {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.6rem;
-  }
-
-  .landing-header {
-    justify-content: space-between;
-    align-items: center;
-    border-radius: 16px;
-  }
-
-  .landing-menu-toggle {
-    display: inline-flex;
-  }
-
-  .landing-menu {
-    display: none;
-    position: absolute;
-    top: calc(100% + 8px);
-    right: 0;
-    background: #ffffff;
-    border: 1px solid var(--brand-line);
-    border-radius: 10px;
-    padding: 0.6rem 0.8rem;
-    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
-    flex-direction: column;
-    gap: 0.55rem;
-    z-index: 20;
-  }
-
-  .landing-menu button {
-    text-align: left;
-  }
-
-  .landing-menu.open {
-    display: flex;
   }
 
   .landing-logo {

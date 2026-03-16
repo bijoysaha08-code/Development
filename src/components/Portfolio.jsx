@@ -1,32 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from 'react-router-dom';
 
 const Portfolio = ({ projects }) => {
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  const handleMenuClick = (targetId) => {
-    setMenuOpen(false);
-    document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  };
-
   return (
     <section className="landing-page">
       <header className="landing-header">
         <span className="landing-logo">Bijoy Saha</span>
-        <button
-          type="button"
-          className="landing-menu-toggle"
-          aria-label="Toggle menu"
-          aria-expanded={menuOpen}
-          onClick={() => setMenuOpen((prev) => !prev)}
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-        <nav className={`landing-menu ${menuOpen ? "open" : ""}`}>
-          <button type="button" onClick={() => handleMenuClick('projects')}>Projects</button>
-        </nav>
       </header>
 
       <section className="landing-hero">
@@ -63,7 +42,6 @@ const Portfolio = ({ projects }) => {
             key={project.slug}
             to={`/project/${project.slug}`}
             className="project-box-link"
-            onClick={() => setMenuOpen(false)}
           >
             <article className="project-box">
               <span className="project-box-index">0{index + 1}</span>
