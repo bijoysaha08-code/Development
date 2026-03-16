@@ -427,7 +427,7 @@ body {
 
 .project-box p {
   margin: 0;
-  color: var(--brand-muted);
+  color: #53586E;
   font-size: 0.9rem;
   line-height: 1.55;
 }
