@@ -48,7 +48,6 @@ const Portfolio = ({ projects }) => {
               <span className="project-box-index">0{index + 1}</span>
               <h2>{project.title}</h2>
               <p>{project.summary}</p>
-              <span className="project-box-cta">View case</span>
             </article>
           </Link>
         ))}
