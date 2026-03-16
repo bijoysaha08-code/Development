@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 export default function ProjectDetail({ project }) {
+  const previewPath = project.linkPath || `#/project/${project.slug}/link`;
+
   return (
     <section className="project-detail-page">
       <header className="project-detail-header">
@@ -43,12 +45,14 @@ export default function ProjectDetail({ project }) {
         </section>
       )}
 
-      <Link
+      <a
         className="project-detail-link-button"
-        to={project.linkPath || `/project/${project.slug}/link`}
+        href={previewPath}
+        target="_blank"
+        rel="noreferrer"
       >
         Open Link
-      </Link>
+      </a>
     </section>
   );
 }
