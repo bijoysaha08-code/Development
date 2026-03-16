@@ -50,12 +50,17 @@ const Portfolio = ({ projects }) => {
             scalable components, and measurable interaction design.
           </p>
           <div className="landing-hero-actions" aria-label="Primary actions">
-            <button type="button" className="landing-hero-btn">
+            <a
+              href="/portfolio/Bijoy-Saha-CV.txt"
+              download="Bijoy-Saha-CV.txt"
+              className="landing-hero-btn"
+            >
               Download CV
-            </button>
+            </a>
             <button
               type="button"
               className="landing-hero-btn landing-hero-btn-secondary"
+              onClick={() => handleMenuClick('contact')}
             >
               Contact
             </button>
