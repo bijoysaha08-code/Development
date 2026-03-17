@@ -5,7 +5,7 @@ const Portfolio = ({ projects }) => {
   return (
     <section className="landing-page">
       <header className="landing-header">
-        <Link to="/" className="landing-logo">Bijoy Saha</Link>
+        <Link to="/" className="landing-logo">Bijoy.B</Link>
       </header>
 
       <section className="landing-hero">
