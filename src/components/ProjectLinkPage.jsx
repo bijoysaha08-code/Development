@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { Link, useNavigate } from 'react-router-dom';
 import Header from './Header';
 import ReportsTable from './ReportsTable';
@@ -110,13 +111,194 @@ const branchOptions = [
   'Flushing',
 ];
 
+const PATIENT_ROWS_PER_LOAD = 10;
+const hospitalBranches = branchOptions.slice(1);
+const patientFirstNames = ['Ethan', 'Olivia', 'Noah', 'Ava', 'Liam', 'Charlotte', 'Mason', 'Sophia', 'James', 'Harper', 'Benjamin', 'Amelia'];
+const patientLastNames = ['Brooks', 'Carter', 'Bennett', 'Mitchell', 'Foster', 'Reed', 'Turner', 'Hayes', 'Collins', 'Evans', 'Scott', 'Cooper', 'Ward'];
+const messageSourceTabs = ['RMO', 'Nurse', 'Lab', 'Patient Home'];
+
+const ipdMessageSeedByRow = {
+  0: {
+    RMO: [
+      {
+        author: 'RMO',
+        text: 'Blood pressure trended low overnight. Monitoring every 2 hours.',
+        time: '09:10 AM',
+      },
+    ],
+    Nurse: [],
+    Lab: [],
+    'Patient Home': [],
+  },
+  2: {
+    RMO: [
+      {
+        author: 'RMO',
+        text: 'Symptoms improved after morning round. Continue same protocol.',
+        time: '08:40 AM',
+      },
+    ],
+    Nurse: [
+      {
+        author: 'Nurse',
+        text: 'Patient tolerated breakfast and oral meds without nausea.',
+        time: '09:20 AM',
+      },
+    ],
+    Lab: [],
+    'Patient Home': [],
+  },
+  4: {
+    RMO: [],
+    Nurse: [
+      {
+        author: 'Nurse',
+        text: 'Temperature spike recorded at 100.8F. Rechecked after sponge care.',
+        time: '10:05 AM',
+      },
+    ],
+    Lab: [
+      {
+        author: 'Lab',
+        text: 'CBC repeat sample collected. Result expected by 1:30 PM.',
+        time: '10:15 AM',
+      },
+    ],
+    'Patient Home': [
+      {
+        author: 'Patient Home',
+        text: 'Family asked if evening visit can be extended by 15 minutes.',
+        time: '10:28 AM',
+      },
+    ],
+  },
+  7: {
+    RMO: [
+      {
+        author: 'RMO',
+        text: 'Observe oxygen saturation trend post-physiotherapy session.',
+        time: '11:05 AM',
+      },
+    ],
+    Nurse: [],
+    Lab: [],
+    'Patient Home': [],
+  },
+  9: {
+    RMO: [],
+    Nurse: [
+      {
+        author: 'Nurse',
+        text: 'Pain score dropped from 6 to 3 after medication.',
+        time: '11:22 AM',
+      },
+    ],
+    Lab: [
+      {
+        author: 'Lab',
+        text: 'Urine culture report uploaded and flagged for review.',
+        time: '11:31 AM',
+      },
+    ],
+    'Patient Home': [],
+  },
+};
+
+const getMessageCount = (threads = {}) => (
+  Object.values(threads).filter((items) => Array.isArray(items) && items.length > 0).length
+);
+
+const buildDepartmentPatients = ({ count, startId, bedPrefix, statuses, diagnoses }) => (
+  Array.from({ length: count }, (_, index) => ({
+    id: `PT-${startId + index}`,
+    name: `${patientFirstNames[index % patientFirstNames.length]} ${patientLastNames[index % patientLastNames.length]}`,
+    ...(bedPrefix ? { bedNumber: `${bedPrefix}-${String(index + 1).padStart(2, '0')}` } : {}),
+    status: statuses[index % statuses.length],
+    diagnosisFor: diagnoses[index % diagnoses.length],
+    brunch: hospitalBranches[index % hospitalBranches.length],
+  }))
+);
+
+const patientsByDepartment = {
+  ICU: buildDepartmentPatients({
+    count: 6,
+    startId: 1001,
+    bedPrefix: 'ICU',
+    statuses: ['Critical', 'Stable', 'Improving', 'Ventilated', 'Observation'],
+    diagnoses: [
+      'Acute respiratory distress',
+      'Post-surgery monitoring',
+      'Cardiac arrest recovery',
+      'Severe pneumonia',
+      'Stroke observation',
+      'Sepsis management',
+    ],
+  }),
+  IPD: buildDepartmentPatients({
+    count: 18,
+    startId: 2101,
+    bedPrefix: 'IPD',
+    statuses: ['Observation', 'Recovering', 'Stable', 'Deteriorated'],
+    diagnoses: [
+      'Fever and dehydration',
+      'Viral pneumonia',
+      'Gastroenteritis',
+      'Kidney stone management',
+      'Chest pain evaluation',
+      'Diabetes stabilization',
+      'COPD exacerbation',
+      'Fracture rehab',
+      'Post-op orthopedic care',
+      'Migraine workup',
+    ],
+  }).map((row, index) => {
+    const messageThreads = ipdMessageSeedByRow[index];
+
+    if (!messageThreads) {
+      return row;
+    }
+
+    return {
+      ...row,
+      messageThreads,
+      messageCount: getMessageCount(messageThreads),
+    };
+  }),
+  OPD: buildDepartmentPatients({
+    count: 36,
+    startId: 3201,
+    statuses: ['Waiting', 'Completed', 'In Consultation'],
+    diagnoses: [
+      'Consultation',
+      'Review',
+    ],
+  }),
+};
+
 export default function ProjectLinkPage({ project }) {
   const navigate = useNavigate();
   const branchMenuRef = useRef(null);
+  const patientLoadTriggerRef = useRef(null);
+  const messageThreadScrollRef = useRef(null);
   const [sidebarExpanded, setSidebarExpanded] = useState(false);
   const [activePage, setActivePage] = useState('Home');
   const [selectedBranch, setSelectedBranch] = useState(branchOptions[0]);
   const [isBranchMenuOpen, setIsBranchMenuOpen] = useState(false);
+  const [activePatientTab, setActivePatientTab] = useState('ICU');
+  const [patientSort, setPatientSort] = useState({ key: 'name', direction: 'asc' });
+  const [patientSearchQuery, setPatientSearchQuery] = useState('');
+  const [visiblePatientRows, setVisiblePatientRows] = useState(PATIENT_ROWS_PER_LOAD);
+  const [openMessageRowId, setOpenMessageRowId] = useState(null);
+  const [activeMessageSourceTab, setActiveMessageSourceTab] = useState('RMO');
+  const [messageReplyText, setMessageReplyText] = useState('');
+  const [patientMessageThreads, setPatientMessageThreads] = useState(() => {
+    const seededRows = patientsByDepartment.IPD.filter((row) => row.messageThreads);
+
+    return seededRows.reduce((accumulator, row) => {
+      accumulator[row.id] = row.messageThreads;
+      return accumulator;
+    }, {});
+  });
 
   useEffect(() => {
     const handleOutsideClick = (event) => {
@@ -132,8 +314,204 @@ export default function ProjectLinkPage({ project }) {
     };
   }, []);
 
+  useEffect(() => {
+    setVisiblePatientRows(PATIENT_ROWS_PER_LOAD);
+  }, [activePatientTab, patientSearchQuery]);
+
   const handleLogoutClick = () => {
     setActivePage('Logout');
+  };
+
+  const activePatients = patientsByDepartment[activePatientTab] || [];
+  const activeMessageRow = activePatients.find((row) => row.id === openMessageRowId) || null;
+  const activeMessageThreads = activeMessageRow
+    ? (patientMessageThreads[activeMessageRow.id] || activeMessageRow.messageThreads || {})
+    : {};
+  const activeThreadMessages = activeMessageThreads[activeMessageSourceTab] || [];
+
+  useEffect(() => {
+    if (!openMessageRowId || !messageThreadScrollRef.current) {
+      return;
+    }
+
+    const container = messageThreadScrollRef.current;
+    container.scrollTop = container.scrollHeight;
+  }, [openMessageRowId, activeMessageSourceTab, activeThreadMessages.length]);
+
+  const showBedColumn = activePatientTab === 'ICU' || activePatientTab === 'IPD';
+  const showStatusColumn = activePatientTab !== 'OPD';
+  const showMessageColumn = activePatientTab !== 'OPD';
+  const diagnosisColumnLabel = activePatientTab === 'OPD' ? 'Reason' : 'Diagnosis for';
+  const filteredPatients = activePatients.filter((row) => {
+    const normalizedQuery = patientSearchQuery.trim().toLowerCase();
+
+    if (!normalizedQuery) {
+      return true;
+    }
+
+    return [
+      row.id,
+      row.name,
+      row.bedNumber,
+      row.status,
+      row.diagnosisFor,
+      row.brunch,
+    ]
+      .filter(Boolean)
+      .some((value) => String(value).toLowerCase().includes(normalizedQuery));
+  });
+  const patientColumns = [
+    { key: 'sl', label: 'SL', sortable: false },
+    { key: 'id', label: 'Patient ID', sortable: true },
+    { key: 'name', label: 'Patient Name', sortable: true },
+    ...(showBedColumn ? [{ key: 'bedNumber', label: 'Bed Number', sortable: true }] : []),
+    ...(showStatusColumn ? [{ key: 'status', label: 'Status', sortable: true }] : []),
+    { key: 'diagnosisFor', label: diagnosisColumnLabel, sortable: true },
+    { key: 'brunch', label: 'Brunch', sortable: true },
+    ...(showMessageColumn ? [{ key: 'message', label: '', sortable: false }] : []),
+  ];
+  const sortedPatients = [...filteredPatients].sort((leftRow, rightRow) => {
+    const { key, direction } = patientSort;
+
+    if (!key || !leftRow[key] || !rightRow[key]) {
+      return 0;
+    }
+
+    const leftValue = String(leftRow[key]).toLowerCase();
+    const rightValue = String(rightRow[key]).toLowerCase();
+
+    if (leftValue < rightValue) {
+      return direction === 'asc' ? -1 : 1;
+    }
+
+    if (leftValue > rightValue) {
+      return direction === 'asc' ? 1 : -1;
+    }
+
+    return 0;
+  });
+  const visiblePatients = sortedPatients.slice(0, visiblePatientRows);
+  const canLoadMorePatients = visiblePatientRows < sortedPatients.length;
+
+  useEffect(() => {
+    const loadTrigger = patientLoadTriggerRef.current;
+
+    if (!loadTrigger || !canLoadMorePatients) {
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setVisiblePatientRows((currentCount) => Math.min(currentCount + PATIENT_ROWS_PER_LOAD, sortedPatients.length));
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: '120px 0px',
+        threshold: 0.1,
+      }
+    );
+
+    observer.observe(loadTrigger);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [canLoadMorePatients, sortedPatients.length]);
+
+  const handlePatientSort = (key) => {
+    setPatientSort((currentSort) => {
+      if (currentSort.key === key) {
+        return {
+          key,
+          direction: currentSort.direction === 'asc' ? 'desc' : 'asc',
+        };
+      }
+
+      return {
+        key,
+        direction: 'asc',
+      };
+    });
+  };
+
+  const openMessagePopup = (row) => {
+    const rowThreads = patientMessageThreads[row.id] || row.messageThreads || {};
+    const firstTabWithMessages = messageSourceTabs.find((tab) => (rowThreads[tab] || []).length > 0) || messageSourceTabs[0];
+
+    setOpenMessageRowId(row.id);
+    setActiveMessageSourceTab(firstTabWithMessages);
+    setMessageReplyText('');
+  };
+
+  const closeMessagePopup = () => {
+    setOpenMessageRowId(null);
+    setActiveMessageSourceTab('RMO');
+    setMessageReplyText('');
+  };
+
+  const handleSendReply = () => {
+    if (!activeMessageRow || !messageReplyText.trim()) {
+      return;
+    }
+
+    setPatientMessageThreads((currentThreads) => {
+      const rowThreads = currentThreads[activeMessageRow.id] || activeMessageRow.messageThreads || {};
+      const nextMessages = [
+        ...(rowThreads[activeMessageSourceTab] || []),
+        {
+          author: 'Doctor',
+          text: messageReplyText.trim(),
+          time: 'Now',
+        },
+      ];
+
+      return {
+        ...currentThreads,
+        [activeMessageRow.id]: {
+          ...rowThreads,
+          [activeMessageSourceTab]: nextMessages,
+        },
+      };
+    });
+
+    setMessageReplyText('');
+  };
+
+  const handleReplyInputKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      handleSendReply();
+    }
+  };
+
+  const getPatientStatusTone = (status) => {
+    const normalizedStatus = String(status || '').toLowerCase();
+
+    if (normalizedStatus === 'ventilated') {
+      return 'ventilated';
+    }
+
+    if (normalizedStatus === 'critical') {
+      return 'critical';
+    }
+
+    if (normalizedStatus.includes('observation')) {
+      return 'observation';
+    }
+
+    if (normalizedStatus === 'improving') {
+      return 'improving';
+    }
+
+    if (normalizedStatus === 'stable') {
+      return 'stable';
+    }
+
+    return 'default';
   };
 
   const renderMainContent = () => {
@@ -165,6 +543,180 @@ export default function ProjectLinkPage({ project }) {
 
               <article className="dashboard-layout-box dashboard-layout-box-wide">
                 <h2 className="dashboard-patients-heading">Patients</h2>
+                <div className="patients-toolbar-row">
+                  <div className="patients-tab-bar">
+                    {['ICU', 'IPD', 'OPD'].map((tab, index) => (
+                      <React.Fragment key={tab}>
+                        <button
+                          className={`patients-tab${activePatientTab === tab ? ' patients-tab-active' : ''}`}
+                          onClick={() => setActivePatientTab(tab)}
+                        >
+                          {tab}
+                        </button>
+                        {index < 2 && <span className="patients-tab-divider" />}
+                      </React.Fragment>
+                    ))}
+                  </div>
+                  <div className="patients-search">
+                    <input
+                      className="patients-search-input"
+                      type="text"
+                      placeholder="Search"
+                      value={patientSearchQuery}
+                      onChange={(event) => setPatientSearchQuery(event.target.value)}
+                    />
+                    <span className="material-symbols-outlined patients-search-icon" aria-hidden="true">search</span>
+                  </div>
+                </div>
+
+                <div className="patients-table-meta">
+                  <span className="material-symbols-outlined patients-table-meta-icon" aria-hidden="true">filter_list</span>
+                  <span className="patients-table-meta-text">{activePatients.length} patients</span>
+                </div>
+
+                <div className="patients-table-shell">
+                  <table className="patients-table">
+                    <thead>
+                      <tr>
+                        {patientColumns.map((column) => (
+                          <th key={column.key}>
+                            {column.sortable ? (
+                              <button
+                                className="patients-header-sort"
+                                type="button"
+                                onClick={() => handlePatientSort(column.key)}
+                              >
+                                <span>{column.label}</span>
+                                <span className="material-symbols-outlined patients-sort-icon" aria-hidden="true">unfold_more</span>
+                              </button>
+                            ) : (
+                              column.label
+                            )}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {visiblePatients.map((row, index) => {
+                        const rowMessageCount = getMessageCount(patientMessageThreads[row.id] || row.messageThreads || {});
+                        const forceUnreadIcon = (activePatientTab === 'ICU' || activePatientTab === 'IPD') && index === 0;
+                        const hasMessages = rowMessageCount > 0 || forceUnreadIcon;
+
+                        return (
+                        <tr key={row.id}>
+                          <td>{index + 1}</td>
+                          <td>{row.id}</td>
+                          <td>{row.name}</td>
+                          {showBedColumn && <td>{row.bedNumber}</td>}
+                          {showStatusColumn && (
+                            <td>
+                              <span className={`patients-status-chip patients-status-chip-${getPatientStatusTone(row.status)}`}>
+                                {row.status}
+                              </span>
+                            </td>
+                          )}
+                          <td>{row.diagnosisFor}</td>
+                          <td>{row.brunch}</td>
+                          {showMessageColumn && (
+                            <td className="patients-message-cell">
+                              <div className="patients-row-actions">
+                                <button
+                                  className="patients-message-icon-button"
+                                  type="button"
+                                  onClick={() => openMessagePopup(row)}
+                                  aria-label={`Open messages for ${row.name}`}
+                                >
+                                  <span
+                                    className={`${hasMessages ? 'material-icons' : 'material-symbols-outlined'} patients-message-icon${hasMessages ? ' patients-message-icon-filled' : ''}`}
+                                    aria-hidden="true"
+                                  >
+                                    {hasMessages ? 'mark_chat_unread' : 'chat_bubble'}
+                                  </span>
+                                </button>
+                                <span className="material-symbols-outlined patients-more-icon" aria-hidden="true">more_vert</span>
+                              </div>
+                            </td>
+                          )}
+                        </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+
+                {canLoadMorePatients && (
+                  <div className="patients-load-sentinel" ref={patientLoadTriggerRef} aria-hidden="true" />
+                )}
+
+                {showMessageColumn && activeMessageRow && createPortal(
+                  <div className="patients-message-popup-overlay" role="presentation" onClick={closeMessagePopup}>
+                    <div
+                      className="patients-message-popup"
+                      role="dialog"
+                      aria-modal="true"
+                      aria-label={`Messages for ${activeMessageRow.name}`}
+                      onClick={(event) => event.stopPropagation()}
+                    >
+                      <div className="patients-message-popup-head">
+                        <div>
+                          <strong>Notes and Messages</strong>
+                          <p>{activeMessageRow.name} · {activeMessageRow.id}</p>
+                        </div>
+                        <button className="patients-message-popup-close" type="button" onClick={closeMessagePopup}>
+                          <span className="material-symbols-outlined" aria-hidden="true">close</span>
+                        </button>
+                      </div>
+
+                      <div className="patients-message-popup-tabs" role="tablist" aria-label="Message source">
+                        {messageSourceTabs.map((source) => {
+                          const sourceCount = (activeMessageThreads[source] || []).length;
+
+                          return (
+                            <button
+                              key={source}
+                              type="button"
+                              role="tab"
+                              aria-selected={activeMessageSourceTab === source}
+                              className={`patients-message-popup-tab${activeMessageSourceTab === source ? ' patients-message-popup-tab-active' : ''}`}
+                              onClick={() => setActiveMessageSourceTab(source)}
+                            >
+                              <span>{source}</span>
+                              {sourceCount > 0 && <span className="patients-message-popup-tab-count">{sourceCount}</span>}
+                            </button>
+                          );
+                        })}
+                      </div>
+
+                      <div className="patients-message-popup-thread" ref={messageThreadScrollRef}>
+                        {activeThreadMessages.length ? (
+                          activeThreadMessages.map((item, index) => (
+                            <div key={`${item.author}-${item.time}-${index}`} className="patients-thread-item">
+                              <div className="patients-thread-item-meta">
+                                <strong>{item.author}</strong>
+                                <span>{item.time}</span>
+                              </div>
+                              <p>{item.text}</p>
+                            </div>
+                          ))
+                        ) : (
+                          <p className="patients-thread-empty">No messages in this tab.</p>
+                        )}
+                      </div>
+
+                      <div className="patients-message-popup-reply">
+                        <input
+                          type="text"
+                          value={messageReplyText}
+                          onChange={(event) => setMessageReplyText(event.target.value)}
+                          onKeyDown={handleReplyInputKeyDown}
+                          placeholder={`Reply to ${activeMessageSourceTab}`}
+                        />
+                        <button type="button" onClick={handleSendReply}>Reply</button>
+                      </div>
+                    </div>
+                  </div>,
+                  document.body
+                )}
               </article>
             </div>
 

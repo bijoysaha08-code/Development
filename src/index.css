@@ -1021,7 +1021,9 @@ body {
 .dashboard-layout-box-wide {
   min-height: 136px;
   padding-top: 20px;
+  padding-bottom: 20px;
   padding-right: 24px;
+  padding-left: 24px;
 }
 
 .dashboard-patients-heading {
@@ -1031,6 +1033,504 @@ body {
   font-weight: 600;
   color: #00231B;
   line-height: 1.2;
+}
+
+.patients-tab-bar {
+  display: inline-flex;
+  align-items: center;
+  height: 40px;
+  background: #FFFFFF;
+  border: 1px solid #00231B;
+  border-radius: 100px;
+  padding: 4px;
+  gap: 0;
+}
+
+.patients-tab {
+  height: 32px;
+  padding: 0 18px;
+  background: transparent;
+  border: none;
+  border-radius: 100px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #00231B;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+  white-space: nowrap;
+}
+
+.patients-tab-active {
+  background: #01B58C;
+  color: #00231B;
+}
+
+.patients-tab-divider {
+  width: 1px;
+  height: 20px;
+  margin: 0 4px;
+  background: #DBEAE7;
+  flex-shrink: 0;
+}
+
+.patients-toolbar-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 24px;
+}
+
+.patients-tab-bar {
+  margin-top: 0;
+}
+
+.patients-search {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  background: #F4F5F7;
+  border-radius: 100px;
+  padding: 12px;
+  flex: 0 0 20%;
+  min-width: 0;
+}
+
+.patients-search-icon {
+  font-size: 20px;
+  color: #00231B;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.patients-search-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(0, 35, 27, 0.5);
+  flex: 1;
+  min-width: 0;
+}
+
+.patients-search-input::placeholder {
+  color: rgba(0, 35, 27, 0.5);
+}
+
+.patients-table-meta {
+  margin-top: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.patients-table-meta-icon {
+  color: #01B58C;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.patients-table-meta-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: #00231B;
+}
+
+.patients-table-shell {
+  margin-top: 20px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #FFFFFF;
+}
+
+.patients-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.patients-table tr {
+  height: 60px;
+  border-bottom: 1px solid rgba(0, 35, 27, 0.15);
+}
+
+.patients-table th {
+  text-align: left;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #00231B;
+  letter-spacing: 0.01em;
+  background: #F7FBFA;
+  padding: 11px 12px;
+}
+
+.patients-table td {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: #00231B;
+  padding: 10px 12px;
+}
+
+.patients-header-sort {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #00231B;
+  cursor: pointer;
+}
+
+.patients-sort-icon {
+  color: #00231B;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.patients-message-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #01B58C;
+  background: rgba(1, 181, 140, 0.08);
+  color: #056060;
+  border-radius: 999px;
+  padding: 4px 10px;
+  min-width: 100px;
+  min-height: 30px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.patients-message-button:hover {
+  background: rgba(1, 181, 140, 0.16);
+}
+
+.patients-message-count-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  border: 1px solid rgba(1, 181, 140, 0.35);
+  background: rgba(1, 181, 140, 0.08);
+  color: #01B58C;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.patients-message-count-chip:hover {
+  background: rgba(1, 181, 140, 0.16);
+}
+
+.patients-message-icon-button {
+  border: none;
+  background: transparent;
+  padding: 0;
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.patients-message-icon {
+  color: #01B58C;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.patients-message-icon-filled {
+  font-family: 'Material Icons';
+  font-weight: 400;
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+.project-link-page .patients-message-icon-filled {
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+.patients-row-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  width: 100%;
+}
+
+.patients-more-icon {
+  color: #00231B;
+  font-size: 20px;
+  line-height: 1;
+  border-radius: 6px;
+  padding: 2px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.patients-more-icon:hover {
+  background: rgba(1, 181, 140, 0.1);
+  color: #01B58C;
+}
+
+.patients-message-cell {
+  text-align: right;
+}
+
+.patients-status-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 4px 10px;
+  min-width: 100px;
+  min-height: 30px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  border: 1px solid rgba(0, 35, 27, 0.2);
+  color: #00231B;
+  background: rgba(0, 35, 27, 0.08);
+}
+
+.patients-status-chip-ventilated {
+  color: #7A4DFF;
+  border-color: rgba(122, 77, 255, 0.45);
+  background: rgba(122, 77, 255, 0.12);
+}
+
+.patients-status-chip-critical {
+  color: #E53935;
+  border-color: rgba(229, 57, 53, 0.45);
+  background: rgba(229, 57, 53, 0.12);
+}
+
+.patients-status-chip-observation {
+  color: #FB8C00;
+  border-color: rgba(251, 140, 0, 0.45);
+  background: rgba(251, 140, 0, 0.12);
+}
+
+.patients-status-chip-improving {
+  color: #00A8A8;
+  border-color: rgba(0, 168, 168, 0.45);
+  background: rgba(0, 168, 168, 0.12);
+}
+
+.patients-status-chip-stable {
+  color: #2E7D32;
+  border-color: rgba(46, 125, 50, 0.45);
+  background: rgba(46, 125, 50, 0.12);
+}
+
+.patients-load-sentinel {
+  height: 1px;
+  width: 100%;
+}
+
+.patients-message-popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 35, 27, 0.34);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 900;
+  padding: 20px;
+}
+
+.patients-message-popup {
+  width: min(760px, 100%);
+  max-height: 80vh;
+  background: #FFFFFF;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 35, 27, 0.15);
+  box-shadow: 0 22px 48px rgba(0, 35, 27, 0.22);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.patients-message-popup-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 16px 18px 12px;
+  border-bottom: 1px solid rgba(0, 35, 27, 0.12);
+}
+
+.patients-message-popup-head strong {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #00231B;
+}
+
+.patients-message-popup-head p {
+  margin: 4px 0 0;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(0, 35, 27, 0.7);
+}
+
+.patients-message-popup-close {
+  border: none;
+  background: transparent;
+  color: #00231B;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.patients-message-popup-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 12px 18px;
+  border-bottom: 1px solid rgba(0, 35, 27, 0.12);
+}
+
+.patients-message-popup-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid rgba(0, 35, 27, 0.18);
+  background: #FFFFFF;
+  color: #00231B;
+  border-radius: 999px;
+  min-height: 32px;
+  padding: 5px 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.patients-message-popup-tab-active {
+  border-color: #01B58C;
+  background: rgba(1, 181, 140, 0.1);
+  color: #016652;
+}
+
+.patients-message-popup-tab-count {
+  min-width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  padding: 0 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(1, 181, 140, 0.18);
+  color: #016652;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.patients-message-popup-thread {
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+  min-height: 180px;
+  max-height: 40vh;
+}
+
+.patients-thread-item {
+  border: 1px solid rgba(0, 35, 27, 0.14);
+  border-radius: 12px;
+  background: #F7FBFA;
+  padding: 10px 12px;
+}
+
+.patients-thread-item-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.patients-thread-item-meta strong {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #00231B;
+}
+
+.patients-thread-item-meta span {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  color: rgba(0, 35, 27, 0.7);
+}
+
+.patients-thread-item p {
+  margin: 6px 0 0;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: #00231B;
+  line-height: 1.4;
+}
+
+.patients-thread-empty {
+  margin: 8px 0;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(0, 35, 27, 0.6);
+}
+
+.patients-message-popup-reply {
+  border-top: 1px solid rgba(0, 35, 27, 0.12);
+  padding: 12px 18px 16px;
+  display: flex;
+  gap: 10px;
+}
+
+.patients-message-popup-reply input {
+  flex: 1;
+  min-width: 0;
+  border: 1px solid rgba(0, 35, 27, 0.2);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: #00231B;
+}
+
+.patients-message-popup-reply button {
+  border: none;
+  border-radius: 10px;
+  background: #01B58C;
+  color: #FFFFFF;
+  min-width: 84px;
+  padding: 0 14px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.patients-message-popup-reply button:hover {
+  background: #019b78;
 }
 
 .dashboard-layout-box-side {
