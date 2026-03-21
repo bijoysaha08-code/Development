@@ -55,12 +55,8 @@ const appointments = [
 
 const overviewQuickStats = [
   {
-    name: 'Critical Alerts',
+    name: 'Critical Patients',
     value: '3',
-  },
-  {
-    name: 'Pending Approvals',
-    value: '7',
   },
   {
     name: 'ICU Patients',
@@ -80,18 +76,219 @@ const overviewQuickStats = [
     alertText: '21 Pending',
     alertTone: 'warning',
   },
+  {
+    name: 'Lab & Imaging',
+    value: '7',
+  },
 ];
 
-const overviewRightPanels = [
+const taskListItems = [
   {
-    label: 'Today focus',
-    value: 'Discharge readiness',
-    note: 'Coordinate final imaging check and family instructions.',
+    id: 'emily-discharge',
+    icon: 'signature',
+    isRead: false,
+    heading: 'Sign Discharge Summary for Emily Carter',
+    date: 'Mar 21, 2026',
+    time: '10:30 AM',
+    details: [
+      { label: 'Patient', value: 'Emily Carter' },
+      { label: 'MRN', value: 'MRN-104917' },
+      { label: 'Ward/Bed', value: 'Ward 5 / B08' },
+      { label: 'Diagnosis', value: 'Pneumonia' },
+      { label: 'Planned Discharge', value: 'Mar 21, 2026' },
+      { label: 'Status', value: 'Pending Signature' },
+    ],
+    actions: ['Sign & Complete'],
   },
   {
-    label: 'Alerts',
-    value: '2 reminders',
-    note: 'Medication audit due at 2 PM and call-back at 4:30 PM.',
+    id: 'sarah-medication',
+    icon: 'pill',
+    isRead: false,
+    heading: 'Approve medicine change for Sarah Lee',
+    date: 'Mar 21, 2026',
+    time: '11:05 AM',
+    details: [
+      { label: 'Patient', value: 'Sarah Lee' },
+      { label: 'MRN', value: 'MRN-104221' },
+      { label: 'Medication', value: 'Metformin' },
+      { label: 'Dose', value: '500 mg' },
+      { label: 'Frequency', value: 'Twice Daily' },
+      { label: 'Ordered By', value: 'Dr. Patel' },
+      { label: 'Status', value: 'Approval Required' },
+    ],
+    actions: ['Approve', 'Modify'],
+  },
+  {
+    id: 'michael-imaging',
+    icon: 'lab_research',
+    isRead: false,
+    heading: 'Review imaging report for Michael Ross',
+    date: 'Mar 21, 2026',
+    time: '09:15 AM',
+    details: [
+      { label: 'Patient', value: 'Michael Ross' },
+      { label: 'MRN', value: 'MRN-104387' },
+      { label: 'Imaging', value: 'CT Scan - Brain' },
+      { label: 'Radiologist', value: 'Dr. Wilson' },
+      { label: 'Report Time', value: '09:15 AM' },
+      { label: 'Status', value: 'Awaiting Review' },
+    ],
+    actions: ['Open Report'],
+  },
+  {
+    id: 'william-progress-note',
+    icon: 'stylus_note',
+    isRead: false,
+    heading: 'Write Progress Notes for William Brown',
+    date: 'Mar 21, 2026',
+    time: '06:30 PM',
+    details: [
+      { label: 'Patient', value: 'William Brown' },
+      { label: 'MRN', value: 'MRN-104456' },
+      { label: 'Location', value: 'ICU / Bed 5' },
+      { label: 'Diagnosis', value: 'Acute Ischemic Stroke' },
+      { label: 'Last Note', value: 'Yesterday - 6:30 PM' },
+      { label: 'Status', value: 'Note Pending' },
+    ],
+    actions: ['Add Note'],
+  },
+  {
+    id: 'emily-discharge-read',
+    icon: 'signature',
+    isRead: true,
+    heading: 'Sign Discharge Summary for Emily Carter',
+    date: 'Mar 21, 2026',
+    time: '10:30 AM',
+    details: [
+      { label: 'Patient', value: 'Emily Carter' },
+      { label: 'MRN', value: 'MRN-104917' },
+      { label: 'Ward/Bed', value: 'Ward 5 / B08' },
+      { label: 'Diagnosis', value: 'Pneumonia' },
+      { label: 'Planned Discharge', value: 'Mar 21, 2026' },
+      { label: 'Status', value: 'Pending Signature' },
+    ],
+    actions: ['Sign & Complete'],
+  },
+  {
+    id: 'michael-imaging-read',
+    icon: 'lab_research',
+    isRead: true,
+    heading: 'Review imaging report for Michael Ross',
+    date: 'Mar 21, 2026',
+    time: '09:15 AM',
+    details: [
+      { label: 'Patient', value: 'Michael Ross' },
+      { label: 'MRN', value: 'MRN-104387' },
+      { label: 'Imaging', value: 'CT Scan - Brain' },
+      { label: 'Radiologist', value: 'Dr. Wilson' },
+      { label: 'Report Time', value: '09:15 AM' },
+      { label: 'Status', value: 'Awaiting Review' },
+    ],
+    actions: ['Open Report'],
+  },
+  {
+    id: 'emily-discharge-repeat',
+    icon: 'signature',
+    isRead: false,
+    heading: 'Sign Discharge Summary for Emily Carter',
+    date: 'Mar 21, 2026',
+    time: '10:30 AM',
+    details: [
+      { label: 'Patient', value: 'Emily Carter' },
+      { label: 'MRN', value: 'MRN-104917' },
+      { label: 'Ward/Bed', value: 'Ward 5 / B08' },
+      { label: 'Diagnosis', value: 'Pneumonia' },
+      { label: 'Planned Discharge', value: 'Mar 21, 2026' },
+      { label: 'Status', value: 'Pending Signature' },
+    ],
+    actions: ['Sign & Complete'],
+  },
+  {
+    id: 'sarah-medication-repeat',
+    icon: 'pill',
+    isRead: false,
+    heading: 'Approve medicine change for Sarah Lee',
+    date: 'Mar 21, 2026',
+    time: '11:05 AM',
+    details: [
+      { label: 'Patient', value: 'Sarah Lee' },
+      { label: 'MRN', value: 'MRN-104221' },
+      { label: 'Medication', value: 'Metformin' },
+      { label: 'Dose', value: '500 mg' },
+      { label: 'Frequency', value: 'Twice Daily' },
+      { label: 'Ordered By', value: 'Dr. Patel' },
+      { label: 'Status', value: 'Approval Required' },
+    ],
+    actions: ['Approve', 'Modify'],
+  },
+  {
+    id: 'michael-imaging-repeat',
+    icon: 'lab_research',
+    isRead: false,
+    heading: 'Review imaging report for Michael Ross',
+    date: 'Mar 21, 2026',
+    time: '09:15 AM',
+    details: [
+      { label: 'Patient', value: 'Michael Ross' },
+      { label: 'MRN', value: 'MRN-104387' },
+      { label: 'Imaging', value: 'CT Scan - Brain' },
+      { label: 'Radiologist', value: 'Dr. Wilson' },
+      { label: 'Report Time', value: '09:15 AM' },
+      { label: 'Status', value: 'Awaiting Review' },
+    ],
+    actions: ['Open Report'],
+  },
+  {
+    id: 'william-progress-note-repeat',
+    icon: 'stylus_note',
+    isRead: false,
+    heading: 'Write Progress Notes for William Brown',
+    date: 'Mar 21, 2026',
+    time: '06:30 PM',
+    details: [
+      { label: 'Patient', value: 'William Brown' },
+      { label: 'MRN', value: 'MRN-104456' },
+      { label: 'Location', value: 'ICU / Bed 5' },
+      { label: 'Diagnosis', value: 'Acute Ischemic Stroke' },
+      { label: 'Last Note', value: 'Yesterday - 6:30 PM' },
+      { label: 'Status', value: 'Note Pending' },
+    ],
+    actions: ['Add Note'],
+  },
+  {
+    id: 'emily-discharge-repeat-2',
+    icon: 'signature',
+    isRead: false,
+    heading: 'Sign Discharge Summary for Emily Carter',
+    date: 'Mar 21, 2026',
+    time: '10:30 AM',
+    details: [
+      { label: 'Patient', value: 'Emily Carter' },
+      { label: 'MRN', value: 'MRN-104917' },
+      { label: 'Ward/Bed', value: 'Ward 5 / B08' },
+      { label: 'Diagnosis', value: 'Pneumonia' },
+      { label: 'Planned Discharge', value: 'Mar 21, 2026' },
+      { label: 'Status', value: 'Pending Signature' },
+    ],
+    actions: ['Sign & Complete'],
+  },
+  {
+    id: 'sarah-medication-repeat-2',
+    icon: 'pill',
+    isRead: false,
+    heading: 'Approve medicine change for Sarah Lee',
+    date: 'Mar 21, 2026',
+    time: '11:05 AM',
+    details: [
+      { label: 'Patient', value: 'Sarah Lee' },
+      { label: 'MRN', value: 'MRN-104221' },
+      { label: 'Medication', value: 'Metformin' },
+      { label: 'Dose', value: '500 mg' },
+      { label: 'Frequency', value: 'Twice Daily' },
+      { label: 'Ordered By', value: 'Dr. Patel' },
+      { label: 'Status', value: 'Approval Required' },
+    ],
+    actions: ['Approve', 'Modify'],
   },
 ];
 
@@ -112,6 +309,8 @@ const branchOptions = [
 ];
 
 const PATIENT_ROWS_PER_LOAD = 10;
+const INITIAL_TASK_ROWS = 10;
+const TASK_ROWS_PER_LOAD = 4;
 const hospitalBranches = branchOptions.slice(1);
 const patientFirstNames = ['Ethan', 'Olivia', 'Noah', 'Ava', 'Liam', 'Charlotte', 'Mason', 'Sophia', 'James', 'Harper', 'Benjamin', 'Amelia'];
 const patientLastNames = ['Brooks', 'Carter', 'Bennett', 'Mitchell', 'Foster', 'Reed', 'Turner', 'Hayes', 'Collins', 'Evans', 'Scott', 'Cooper', 'Ward'];
@@ -215,7 +414,7 @@ const buildDepartmentPatients = ({ count, startId, bedPrefix, statuses, diagnose
     ...(bedPrefix ? { bedNumber: `${bedPrefix}-${String(index + 1).padStart(2, '0')}` } : {}),
     status: statuses[index % statuses.length],
     diagnosisFor: diagnoses[index % diagnoses.length],
-    brunch: hospitalBranches[index % hospitalBranches.length],
+    branch: hospitalBranches[index % hospitalBranches.length],
   }))
 );
 
@@ -291,6 +490,11 @@ export default function ProjectLinkPage({ project }) {
   const [openMessageRowId, setOpenMessageRowId] = useState(null);
   const [activeMessageSourceTab, setActiveMessageSourceTab] = useState('RMO');
   const [messageReplyText, setMessageReplyText] = useState('');
+  const [isScheduleFullscreen, setIsScheduleFullscreen] = useState(false);
+  const [selectedTaskId, setSelectedTaskId] = useState(null);
+  const [activeTaskTab, setActiveTaskTab] = useState('Todo');
+  const [visibleTaskCount, setVisibleTaskCount] = useState(INITIAL_TASK_ROWS);
+  const taskListScrollRef = useRef(null);
   const [patientMessageThreads, setPatientMessageThreads] = useState(() => {
     const seededRows = patientsByDepartment.IPD.filter((row) => row.messageThreads);
 
@@ -315,8 +519,29 @@ export default function ProjectLinkPage({ project }) {
   }, []);
 
   useEffect(() => {
+    document.body.classList.add('project-link-route-active');
+
+    return () => {
+      document.body.classList.remove('project-link-route-active');
+    };
+  }, []);
+
+  useEffect(() => {
     setVisiblePatientRows(PATIENT_ROWS_PER_LOAD);
-  }, [activePatientTab, patientSearchQuery]);
+  }, [activePatientTab, patientSearchQuery, selectedBranch]);
+
+  useEffect(() => {
+    if (!isScheduleFullscreen) {
+      return undefined;
+    }
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [isScheduleFullscreen]);
 
   const handleLogoutClick = () => {
     setActivePage('Logout');
@@ -328,6 +553,9 @@ export default function ProjectLinkPage({ project }) {
     ? (patientMessageThreads[activeMessageRow.id] || activeMessageRow.messageThreads || {})
     : {};
   const activeThreadMessages = activeMessageThreads[activeMessageSourceTab] || [];
+  const selectedTask = taskListItems.find((item) => item.id === selectedTaskId) || null;
+  const filteredTaskItems = taskListItems.filter((item) => (activeTaskTab === 'Todo' ? !item.isRead : item.isRead));
+  const visibleTaskItems = filteredTaskItems.slice(0, visibleTaskCount);
 
   useEffect(() => {
     if (!openMessageRowId || !messageThreadScrollRef.current) {
@@ -338,12 +566,51 @@ export default function ProjectLinkPage({ project }) {
     container.scrollTop = container.scrollHeight;
   }, [openMessageRowId, activeMessageSourceTab, activeThreadMessages.length]);
 
+  useEffect(() => {
+    setVisibleTaskCount(Math.min(INITIAL_TASK_ROWS, filteredTaskItems.length));
+
+    if (taskListScrollRef.current) {
+      taskListScrollRef.current.scrollTop = 0;
+    }
+  }, [activeTaskTab]);
+
+  useEffect(() => {
+    const container = taskListScrollRef.current;
+    if (!container) {
+      return undefined;
+    }
+
+    const handleTaskScroll = () => {
+      const scrollTop = container.scrollTop;
+      const scrollHeight = container.scrollHeight;
+      const clientHeight = container.clientHeight;
+
+      if (scrollHeight - scrollTop <= clientHeight + 50) {
+        setVisibleTaskCount((prevCount) => {
+          if (prevCount >= filteredTaskItems.length) {
+            return prevCount;
+          }
+
+          return Math.min(prevCount + TASK_ROWS_PER_LOAD, filteredTaskItems.length);
+        });
+      }
+    };
+
+    container.addEventListener('scroll', handleTaskScroll);
+    return () => container.removeEventListener('scroll', handleTaskScroll);
+  }, [filteredTaskItems.length]);
+
   const showBedColumn = activePatientTab === 'ICU' || activePatientTab === 'IPD';
   const showStatusColumn = activePatientTab !== 'OPD';
   const showMessageColumn = activePatientTab !== 'OPD';
   const diagnosisColumnLabel = activePatientTab === 'OPD' ? 'Reason' : 'Diagnosis for';
   const filteredPatients = activePatients.filter((row) => {
+    const matchesBranch = selectedBranch === branchOptions[0] || row.branch === selectedBranch;
     const normalizedQuery = patientSearchQuery.trim().toLowerCase();
+
+    if (!matchesBranch) {
+      return false;
+    }
 
     if (!normalizedQuery) {
       return true;
@@ -355,7 +622,7 @@ export default function ProjectLinkPage({ project }) {
       row.bedNumber,
       row.status,
       row.diagnosisFor,
-      row.brunch,
+      row.branch,
     ]
       .filter(Boolean)
       .some((value) => String(value).toLowerCase().includes(normalizedQuery));
@@ -367,7 +634,7 @@ export default function ProjectLinkPage({ project }) {
     ...(showBedColumn ? [{ key: 'bedNumber', label: 'Bed Number', sortable: true }] : []),
     ...(showStatusColumn ? [{ key: 'status', label: 'Status', sortable: true }] : []),
     { key: 'diagnosisFor', label: diagnosisColumnLabel, sortable: true },
-    { key: 'brunch', label: 'Brunch', sortable: true },
+    { key: 'branch', label: 'Branch', sortable: true },
     ...(showMessageColumn ? [{ key: 'message', label: '', sortable: false }] : []),
   ];
   const sortedPatients = [...filteredPatients].sort((leftRow, rightRow) => {
@@ -541,8 +808,22 @@ export default function ProjectLinkPage({ project }) {
                 ))}
               </div>
 
-              <article className="dashboard-layout-box dashboard-layout-box-wide">
-                <h2 className="dashboard-patients-heading">Patients</h2>
+              <article
+                className={`dashboard-layout-box dashboard-layout-box-wide${isScheduleFullscreen ? ' dashboard-layout-box-wide-expanded' : ''}`}
+              >
+                <div className="dashboard-patients-heading-row">
+                  <h2 className="dashboard-patients-heading">Today's Schedule</h2>
+                  <button
+                    type="button"
+                    className="dashboard-patients-heading-toggle"
+                    onClick={() => setIsScheduleFullscreen((value) => !value)}
+                    aria-label={isScheduleFullscreen ? 'Close Fullscreen' : 'Open In Full'}
+                  >
+                    <span className="material-symbols-outlined dashboard-patients-heading-icon" aria-hidden="true">
+                      {isScheduleFullscreen ? 'close_fullscreen' : 'open_in_full'}
+                    </span>
+                  </button>
+                </div>
                 <div className="patients-toolbar-row">
                   <div className="patients-tab-bar">
                     {['ICU', 'IPD', 'OPD'].map((tab, index) => (
@@ -616,7 +897,7 @@ export default function ProjectLinkPage({ project }) {
                             </td>
                           )}
                           <td>{row.diagnosisFor}</td>
-                          <td>{row.brunch}</td>
+                          <td>{row.branch}</td>
                           {showMessageColumn && (
                             <td className="patients-message-cell">
                               <div className="patients-row-actions">
@@ -721,13 +1002,97 @@ export default function ProjectLinkPage({ project }) {
             </div>
 
             <div className="dashboard-overview-right">
-              {overviewRightPanels.map((item) => (
-                <article key={item.label} className="dashboard-layout-box dashboard-layout-box-side">
-                  <span className="dashboard-overview-label">{item.label}</span>
-                  <strong>{item.value}</strong>
-                  <p>{item.note}</p>
-                </article>
-              ))}
+              <article className="dashboard-layout-box dashboard-layout-box-side dashboard-tasklist-card">
+                {selectedTask ? (
+                  <>
+                    <div className="dashboard-tasklist-detail-header">
+                      <button
+                        type="button"
+                        className="dashboard-tasklist-back-button"
+                        onClick={() => setSelectedTaskId(null)}
+                        aria-label="Back to task list"
+                      >
+                        <span className="material-symbols-outlined" aria-hidden="true">arrow_back</span>
+                      </button>
+                      <strong>{selectedTask.heading}</strong>
+                    </div>
+
+                    <dl className="dashboard-tasklist-detail-list">
+                      {selectedTask.details.map((detail) => (
+                        <div key={`${selectedTask.id}-${detail.label}`}>
+                          <dt>{detail.label}</dt>
+                          <dd>{detail.value}</dd>
+                        </div>
+                      ))}
+                    </dl>
+
+                    <div className="dashboard-tasklist-actions">
+                      {selectedTask.actions.map((action, index) => (
+                        <button
+                          key={`${selectedTask.id}-${action}`}
+                          type="button"
+                          className={`dashboard-tasklist-action${index === 0 ? ' dashboard-tasklist-action-primary' : ''}`}
+                        >
+                          {action}
+                        </button>
+                      ))}
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <strong>Tasklist</strong>
+                    <div className="dashboard-tasklist-tab-row" role="tablist" aria-label="Task list status tabs">
+                      <div className="patients-tab-bar">
+                        <button
+                          type="button"
+                          role="tab"
+                          aria-selected={activeTaskTab === 'Todo'}
+                          className={`patients-tab${activeTaskTab === 'Todo' ? ' patients-tab-active' : ''}`}
+                          onClick={() => setActiveTaskTab('Todo')}
+                        >
+                          Todo
+                        </button>
+                        <span className="patients-tab-divider" aria-hidden="true"></span>
+                        <button
+                          type="button"
+                          role="tab"
+                          aria-selected={activeTaskTab === 'Completed'}
+                          className={`patients-tab${activeTaskTab === 'Completed' ? ' patients-tab-active' : ''}`}
+                          onClick={() => setActiveTaskTab('Completed')}
+                        >
+                          Completed
+                        </button>
+                      </div>
+                    </div>
+                    <div className="dashboard-tasklist-rows" ref={taskListScrollRef} role="list" aria-label="Task list rows">
+                      {visibleTaskItems.map((item) => (
+                        <button
+                          key={item.id}
+                          type="button"
+                          role="listitem"
+                          className="dashboard-tasklist-row"
+                          onClick={() => setSelectedTaskId(item.id)}
+                          aria-label={`${item.heading} ${item.date} ${item.time}`}
+                        >
+                          <span className="dashboard-tasklist-row-icon-col" aria-hidden="true">
+                            <span className="material-symbols-outlined dashboard-tasklist-row-title-icon">{item.icon}</span>
+                          </span>
+                          <span className="dashboard-tasklist-row-content-col">
+                            <span className={`dashboard-tasklist-row-title ${item.isRead ? 'dashboard-tasklist-row-title-read' : 'dashboard-tasklist-row-title-unread'}`}>
+                              {item.heading}
+                            </span>
+                            <span className="dashboard-tasklist-row-meta">
+                              <span>{item.date}</span>
+                              <span>{item.time}</span>
+                            </span>
+                          </span>
+                        </button>
+                      ))}
+                    </div>
+                  </>
+                )}
+              </article>
+
             </div>
           </div>
         </>

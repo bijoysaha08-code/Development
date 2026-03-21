@@ -8,17 +8,17 @@
 - [x] Customize the Project
   - Added components for patient dashboard layout (Header, Vitals, ReportsTable) and sample data.
 
-- [ ] Install Required Extensions
+- [x] Install Required Extensions
   - No specific extensions required.
 
-- [ ] Compile the Project
-  - User will need to run `npm install` once Node is available.
+- [x] Compile the Project
+  - Verified locally with `npm run build` after dependencies became available.
 
-- [ ] Create and Run Task
+- [x] Create and Run Task
   - Not required.
 
-- [ ] Launch the Project
-  - After dependencies installed, use `npm run dev`.
+- [x] Launch the Project
+  - Start locally with `npm run dev` when interactive preview is needed.
 
-- [ ] Ensure Documentation is Complete
+- [x] Ensure Documentation is Complete
   - README.md added with setup instructions.
