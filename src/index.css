@@ -1,4 +1,66 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+/* Unread card: 1px border #EBEBEB */
+.dashboard-tasklist-row.dashboard-tasklist-row-unread {
+  border: 1px solid #EBEBEB !important;
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+}
+/* Align date, time, and icon in a row for completed cards */
+.dashboard-tasklist-row.dashboard-tasklist-row-completed .dashboard-tasklist-row-meta {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0;
+  width: 100%;
+  justify-content: space-between;
+}
+.dashboard-tasklist-row.dashboard-tasklist-row-completed .dashboard-tasklist-row-meta span {
+  margin: 0;
+}
+.dashboard-tasklist-row.dashboard-tasklist-row-completed .dashboard-tasklist-check-icon {
+  margin-left: 12px !important;
+  font-size: 22px !important;
+  vertical-align: middle;
+}
+/* Completed tab: icon background white */
+.dashboard-tasklist-row.dashboard-tasklist-row-completed .dashboard-tasklist-row-title-icon {
+  background: #fff !important;
+}
+/* Force completed card to match read card style */
+.dashboard-tasklist-row.dashboard-tasklist-row-completed {
+  background: #EEF6F4 !important;
+  border: none !important;
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+}
+/* Force read card background color */
+.dashboard-tasklist-row.dashboard-tasklist-row-read {
+  background: #EEF6F4 !important;
+  border: none !important;
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+}
+/* Tasklist Card Styles */
+.dashboard-tasklist-row {
+  border-radius: 12px;
+  margin-bottom: 8px;
+  border: none;
+  background: #fff;
+  border: 1px solid transparent;
+  transition: box-shadow 0.18s, border 0.18s, background 0.18s;
+}
+/* Center the tasklist cards horizontally */
+/* Center the tasklist cards horizontally */
+.dashboard-tasklist-rows {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  overflow-y: auto;
+  min-height: 0;
+  flex: 1 1 0;
+  scrollbar-gutter: stable;
+}
+
 
 :root {
   --brand-bg: #ffffff;
@@ -283,9 +345,36 @@ body.project-link-route-active .main-content {
   color: #12232A;
   font-family: 'Inter', sans-serif;
   font-size: 32px;
-  font-weight: 400;
-  text-decoration: none;
-  letter-spacing: 0.03em;
+  font-weight: 600;
+  line-height: 1.05;
+}
+
+
+/* Dashboard stat card layout styles */
+.dashboard-overview-left-top {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.dashboard-layout-box {
+  background: #fff;
+  border: none;
+  border-radius: 18px;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+  padding: 0.95rem;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.dashboard-stat-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 0.45rem;
+  min-height: 160px;
+  position: relative;
 }
 
 .landing-menu {
@@ -1014,32 +1103,6 @@ body.project-link-route-active .dashboard-overview-right {
   font-size: 0.9rem;
 }
 
-.dashboard-stat-box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  gap: 0.45rem;
-  min-height: 160px;
-  position: relative;
-}
-
-.dashboard-stat-alert {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.18rem 0.55rem;
-  border-radius: 999px;
-  font-family: 'Inter', sans-serif;
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 1.2;
-  white-space: nowrap;
-}
 
 .dashboard-stat-alert-warning {
   background: #fef3c7;
@@ -1706,9 +1769,7 @@ body.project-link-route-active .dashboard-overview-right {
 }
 
 .dashboard-tasklist-row {
-  border: none;
-  border-bottom: 1px solid rgba(0, 35, 27, 0.12);
-  border-radius: 0;
+  /* No border or border-radius here, handled by state classes */
   background: #ffffff;
   width: 100%;
   min-height: 60px;
@@ -1761,6 +1822,7 @@ body.project-link-route-active .dashboard-overview-right {
 
 .dashboard-tasklist-row-title-unread {
   font-weight: 500;
+  text-decoration: none !important;
 }
 
 .dashboard-tasklist-row-title-read {
@@ -1776,6 +1838,13 @@ body.project-link-route-active .dashboard-overview-right {
   padding: 4px;
 }
 
+.dashboard-tasklist-row-unread .dashboard-tasklist-row-title-icon {
+  background: rgba(1, 181, 140, 0.1) !important;
+}
+.dashboard-tasklist-row-read .dashboard-tasklist-row-title-icon {
+  background: #fff !important;
+}
+
 .dashboard-tasklist-row-meta {
   display: flex;
   flex-direction: row;
@@ -1785,9 +1854,10 @@ body.project-link-route-active .dashboard-overview-right {
   white-space: nowrap;
   font-family: 'Inter', sans-serif;
   font-size: 11px;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 1.3;
   color: #4B5563;
+  margin-top: 8px;
 }
 
 .dashboard-tasklist-row-meta span:last-child {
@@ -2564,5 +2634,7 @@ body.project-link-route-active .dashboard-overview-right {
   }
 }
 
+
 /* alert style removed; not used */
+}
 

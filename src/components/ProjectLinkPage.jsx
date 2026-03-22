@@ -1065,29 +1065,43 @@ export default function ProjectLinkPage({ project }) {
                       </div>
                     </div>
                     <div className="dashboard-tasklist-rows" ref={taskListScrollRef} role="list" aria-label="Task list rows">
-                      {visibleTaskItems.map((item) => (
-                        <button
-                          key={item.id}
-                          type="button"
-                          role="listitem"
-                          className="dashboard-tasklist-row"
-                          onClick={() => setSelectedTaskId(item.id)}
-                          aria-label={`${item.heading} ${item.date} ${item.time}`}
-                        >
-                          <span className="dashboard-tasklist-row-icon-col" aria-hidden="true">
-                            <span className="material-symbols-outlined dashboard-tasklist-row-title-icon">{item.icon}</span>
-                          </span>
-                          <span className="dashboard-tasklist-row-content-col">
-                            <span className={`dashboard-tasklist-row-title ${item.isRead ? 'dashboard-tasklist-row-title-read' : 'dashboard-tasklist-row-title-unread'}`}>
-                              {item.heading}
+                      {visibleTaskItems.map((item, idx) => {
+                        // First 4 cards as unread, rest as read
+                        let isRead = idx >= 4;
+                        let rowClass = 'dashboard-tasklist-row';
+                        if (activeTaskTab === 'Completed') {
+                          rowClass += ' dashboard-tasklist-row-completed';
+                        } else if (isRead) {
+                          rowClass += ' dashboard-tasklist-row-read';
+                        } else {
+                          rowClass += ' dashboard-tasklist-row-unread';
+                        }
+                        return (
+                          <button
+                            key={item.id}
+                            type="button"
+                            role="listitem"
+                            className={rowClass}
+                            onClick={() => setSelectedTaskId(item.id)}
+                            aria-label={`${item.heading} ${item.date} ${item.time}`}
+                          >
+                            <span className="dashboard-tasklist-row-icon-col" aria-hidden="true">
+                              <span className="material-symbols-outlined dashboard-tasklist-row-title-icon">{item.icon}</span>
                             </span>
-                            <span className="dashboard-tasklist-row-meta">
-                              <span>{item.date}</span>
-                              <span>{item.time}</span>
+                            <span className="dashboard-tasklist-row-content-col">
+                              <span className={`dashboard-tasklist-row-title ${isRead ? 'dashboard-tasklist-row-title-read' : 'dashboard-tasklist-row-title-unread'}`}>{item.heading}</span>
+                              <span className="dashboard-tasklist-row-meta">
+                                <span>{item.date}</span>
+                                <span>{item.time}
+                                  {activeTaskTab === 'Completed' && (
+                                    <span className="material-symbols-outlined dashboard-tasklist-check-icon" style={{ color: '#01B58C', marginLeft: 6, fontVariationSettings: '"FILL" 1' }}>check_circle</span>
+                                  )}
+                                </span>
+                              </span>
                             </span>
-                          </span>
-                        </button>
-                      ))}
+                          </button>
+                        );
+                      })}
                     </div>
                   </>
                 )}
