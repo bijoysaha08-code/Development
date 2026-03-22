@@ -1,41 +1,43 @@
 {
-  "hash": "8f5bbf85",
+  "hash": "71116328",
   "configHash": "84fed270",
-  "lockfileHash": "a7d89283",
-  "browserHash": "5396d5c3",
+  "lockfileHash": "6be2b8a5",
+  "browserHash": "bd647721",
   "optimized": {
+    "react-dom": {
+      "src": "../../node_modules/react-dom/index.js",
+      "file": "react-dom.js",
+      "fileHash": "df1b21a7",
+      "needsInterop": true
+    },
     "react-dom/client": {
       "src": "../../node_modules/react-dom/client.js",
       "file": "react-dom_client.js",
-      "fileHash": "c1010db0",
+      "fileHash": "554f12c2",
       "needsInterop": true
     },
     "react-router-dom": {
       "src": "../../node_modules/react-router-dom/dist/index.mjs",
       "file": "react-router-dom.js",
-      "fileHash": "723c1354",
+      "fileHash": "f35713f3",
       "needsInterop": false
     },
     "react": {
       "src": "../../node_modules/react/index.js",
       "file": "react.js",
-      "fileHash": "c7f6178a",
+      "fileHash": "7a1069f7",
       "needsInterop": true
     },
     "react/jsx-dev-runtime": {
       "src": "../../node_modules/react/jsx-dev-runtime.js",
       "file": "react_jsx-dev-runtime.js",
-      "fileHash": "0d681b48",
+      "fileHash": "77f34e52",
       "needsInterop": true
     }
   },
   "chunks": {
     "react-TUYU05Ph": {
       "file": "react-TUYU05Ph.js",
-      "isDynamicEntry": false
-    },
-    "react-dom-DMGCgcj7": {
-      "file": "react-dom-DMGCgcj7.js",
       "isDynamicEntry": false
     }
   }
