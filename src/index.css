@@ -1,3 +1,27 @@
+.header-mail-group {
+  height: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+/* Header mail group hover effect: 1px border, blue color */
+.header-mail-group {
+  border: 1px solid transparent;
+  transition: border 0.2s;
+}
+.header-mail-group:hover, .header-mail-group:focus {
+  border: 1px solid #0F36FA;
+}
+/* Responsive: Hide email text in header mail group on mobile, show only icon */
+@media (max-width: 600px) {
+  .header-mail-text {
+    display: none !important;
+  }
+  .header-mail-group {
+    padding-left: 0.7rem !important;
+    padding-right: 0.7rem !important;
+  }
+}
 /* Add border and shadow to hero photo */
 .hero-photo {
   border: 3px solid #e0e0e0;
@@ -2443,23 +2467,25 @@ body.project-link-route-active .dashboard-overview-right {
   font-size: 1.3rem;
 }
 
-.landing-info p {
-  margin: 0.75rem 0 0;
-  color: var(--brand-muted);
-  line-height: 1.65;
+.landing-logo {
+  color: #171D23;
+  font-family: 'Inter', sans-serif;
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.05;
+  text-decoration: none;
+  color: rgb(23, 29, 35);
+  font-family: Inter, sans-serif;
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.05;
+  text-decoration-line: none;
+  text-decoration-thickness: initial;
+  text-decoration-style: initial;
+  text-decoration-color: initial;
+  padding-left: 0 !important;
+  padding-right: 2rem;
 }
-
-.landing-tags {
-  margin-top: 1rem;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.55rem;
-}
-
-.landing-tag {
-  border: 1px solid rgba(5, 96, 96, 0.3);
-  background: rgba(5, 96, 96, 0.06);
-  border-radius: 999px;
   color: var(--brand-accent-soft);
   font-size: 0.82rem;
   font-weight: 600;
