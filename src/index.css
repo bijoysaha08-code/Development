@@ -2460,31 +2460,12 @@ body.project-link-route-active .dashboard-overview-right {
   backdrop-filter: blur(8px);
 }
 
+
 .landing-info h2,
 .landing-contact h2 {
   margin: 0;
   color: var(--brand-ink);
   font-size: 1.3rem;
-}
-
-  color: #171D23;
-  font-family: 'Inter', sans-serif;
-  font-size: 32px;
-  font-weight: 600;
-  line-height: 1.05;
-  text-decoration: none;
-  color: rgb(23, 29, 35);
-  font-family: Inter, sans-serif;
-  font-size: 32px;
-  font-weight: 600;
-  line-height: 1.05;
-  text-decoration-line: none;
-  text-decoration-thickness: initial;
-  text-decoration-style: initial;
-  text-decoration-color: initial;
-  padding-left: 0 !important;
-  padding-right: 2rem;
-}
 }
 
 .landing-contact {
