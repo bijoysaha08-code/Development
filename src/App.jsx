@@ -107,7 +107,6 @@ export default function App() {
       <main className="main-content">
         <Routes>
           <Route path="/" element={<Portfolio projects={projects} />} />
-          <Route path="/portfolio" element={<Portfolio projects={projects} />} />
           <Route path="/project/:projectId" element={<ProjectDetailRoute />} />
           <Route path="/project/:projectId/link" element={<ProjectLinkRoute />} />
           <Route path="*" element={<Navigate to="/" replace />} />
